@@ -9,7 +9,8 @@
     "rocket"
   ],
   "dependencies": {
-    "com.rocket.rocketlog": "https://github.com/RocketGamesDev/RocketLog.git#55d3e5f9c01cd682e78f16f78a44a1add2d7a057"
+    "com.rocket.rocketlog": "https://github.com/RocketGamesDev/RocketLog.git#55d3e5f9c01cd682e78f16f78a44a1add2d7a057",
+    "com.rocket.rocketcoroutine": "https://github.com/RocketGamesDev/RocketCoroutine.git#4ae9b9664abf3850a2869e957be0a753e3cb9844"
   },
   "author": {
     "name": "Rocket Games",

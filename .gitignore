@@ -4,6 +4,8 @@
 Temp/
 Obj/
 Build/
+node_modules/
+node_modules.meta
 UnityGenerated/
 /Library/
 AssetBundles/

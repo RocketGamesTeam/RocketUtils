@@ -1,7 +1,8 @@
 {
     "name": "com.rocket.rocketutils",
     "references": [
-        "com.rocket.rocketlog"
+        "com.rocket.rocketlog",
+        "com.rocket.rocketcoroutine"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
