@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using UnityEngine;
 using System;
 
-namespace Panteon.Plugins.ThirdParty.SerializableDictionary
+namespace RocketUtils.SerializableDictionary
 {
 	public abstract class SerializableHashSetBase
 	{
