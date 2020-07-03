@@ -1,4 +1,4 @@
-﻿namespace RocketUtils.Modals
+﻿namespace RocketUtils.Models
 {
     public enum AdFormat
     {
