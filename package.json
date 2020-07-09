@@ -9,8 +9,8 @@
     "rocket"
   ],
   "dependencies": {
-    "com.rocket.rocketlogtest": "1.0.2",
-    "com.rocket.rocketcoroutinetest": "1.0.0"
+    "com.rocket.rocketlog": "1.0.2",
+    "com.rocket.rocketcoroutine": "1.0.2"
   },
   "author": {
     "name": "Rocket Games",
