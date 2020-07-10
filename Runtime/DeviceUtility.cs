@@ -1,4 +1,5 @@
 ﻿#if UNITY_IOS && !UNITY_EDITOR
+using RocketUtils.Models;
 using RocketUtils.Plugins.iOS.Keychain;
 #endif
 
