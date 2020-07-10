@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿#if UNITY_IOS && !UNITY_EDITOR
+using RocketUtils.Plugins.iOS.Keychain;
+#endif
+
+using UnityEngine;
 
 namespace RocketUtils
 {
