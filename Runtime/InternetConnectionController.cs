@@ -48,11 +48,17 @@ namespace RocketUtils
 
 		private static NetworkReachability _internetReachability;
 
+	    private static bool _isInitialized;
+
 		private static readonly RocLog Log = new RocLog(typeof(InternetConnectionController).Name, DebugLevels.Info);
 
 
 		public static void Initialize()
 		{
+			if(_isInitialized) return;
+
+			_isInitialized = true;
+
 			InternetReachability = Application.internetReachability;
 			CoroutineController.StartCoroutine(CheckInternetConnectionRoutine());
 		}
