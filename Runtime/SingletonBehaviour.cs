@@ -24,7 +24,7 @@ namespace RocketUtils
 
         protected virtual void Awake()
         {
-            if(_instance)
+            if(_instance && _instance != this)
                 Destroy(gameObject);
         }
 
