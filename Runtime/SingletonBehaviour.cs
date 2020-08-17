@@ -22,6 +22,12 @@ namespace RocketUtils
             }
         }
 
+        protected virtual void Awake()
+        {
+            if(_instance)
+                Destroy(gameObject);
+        }
+
         private static T _instance;
     }
 }
