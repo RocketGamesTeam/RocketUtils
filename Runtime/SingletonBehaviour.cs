@@ -2,26 +2,31 @@
 
 namespace RocketUtils
 {
-    public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
-        public static T Instance
+        private void Awake()
         {
-            get
+            if (Instance == null)
             {
-                if (_instance == null)
+                Instance = (T)FindObjectOfType(typeof(T));
+                if (Instance == null)
                 {
-                    _instance = (T) FindObjectOfType(typeof(T));
-                    if (_instance == null)
-                    {
-                        Debug.LogError("An instance of " + typeof(T) +
-                                                   " is needed in the scene, but there is none.");
-                    }
+                    Debug.LogError("An instance of " + typeof(T) +
+                                   " is needed in the scene, but there is none.");
                 }
-
-                return _instance;
+                else
+                {
+                    OnAwake();
+                }
             }
-        }
+            else if (Instance != this)
+            {
+                Destroy(gameObject); // On reload, singleton already set, so destroy duplicate.
+            }
+        }        
 
-        private static T _instance;
+        protected abstract void OnAwake();
+
+        public static T Instance { get; private set; }
     }
 }
