@@ -34,55 +34,34 @@ namespace RocketUtils
 #if ROC_DEBUG_MODE
         void OnGUI()
         {
-            if(!DrawDebugLabel) return;
+            if (!DrawDebugLabel) return;
 
-            DrawTextWithOutline(new Rect(15, Screen.height - 35, 300, 80), "Rocket Debug", new GUIStyle(), Color.white, Color.black, 1);
+            DrawOutline(new Rect(15, Screen.height - 25, 300, 80), "Rocket Debug", 1, new GUIStyle
+            {
+                fontSize = 12
+            });
+            GUI.Label(new Rect(15, Screen.height - 25, 300, 80), "Rocket Debug", new GUIStyle
+            {
+                normal = { textColor = Color.white },
+                fontSize = 12
+            });
         }
 
-        void DrawTextWithOutline(Rect centerRect, string text, GUIStyle style, Color borderColor, Color innerColor, int borderWidth)
+        void DrawOutline(Rect r, string t, int strength, GUIStyle style)
         {
-            // assign the border color
-            style.normal.textColor = borderColor;
-            style.fontSize = 24;
-
-            // draw an outline color copy to the left and up from original
-            Rect modRect = centerRect;
-            modRect.x -= borderWidth;
-            modRect.y -= borderWidth;
-            GUI.Label(modRect, text, style);
-
-
-            // stamp copies from the top left corner to the top right corner
-            while (modRect.x <= centerRect.x + borderWidth)
+            GUI.color = new Color(0, 0, 0, 1);
+            int i;
+            for (i = -strength; i <= strength; i++)
             {
-                modRect.x++;
-                GUI.Label(modRect, text, style);
+                GUI.Label(new Rect(r.x - strength, r.y + i, r.width, r.height), t, style);
+                GUI.Label(new Rect(r.x + strength, r.y + i, r.width, r.height), t, style);
             }
-
-            // stamp copies from the top right corner to the bottom right corner
-            while (modRect.y <= centerRect.y + borderWidth)
+            for (i = -strength + 1; i <= strength - 1; i++)
             {
-                modRect.y++;
-                GUI.Label(modRect, text, style);
+                GUI.Label(new Rect(r.x + i, r.y - strength, r.width, r.height), t, style);
+                GUI.Label(new Rect(r.x + i, r.y + strength, r.width, r.height), t, style);
             }
-
-            // stamp copies from the bottom right corner to the bottom left corner
-            while (modRect.x >= centerRect.x - borderWidth)
-            {
-                modRect.x--;
-                GUI.Label(modRect, text, style);
-            }
-
-            // stamp copies from the bottom left corner to the top left corner
-            while (modRect.y >= centerRect.y - borderWidth)
-            {
-                modRect.y--;
-                GUI.Label(modRect, text, style);
-            }
-
-            // draw the inner color version in the center
-            style.normal.textColor = innerColor;
-            GUI.Label(centerRect, text, style);
+            GUI.color = new Color(1, 1, 1, 1);
         }
 #endif
     }
