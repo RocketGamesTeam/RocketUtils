@@ -5,6 +5,7 @@ namespace RocketUtils
     public abstract class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
         protected bool DrawDebugLabel;
+        private static T _instance;
 
         private void Awake()
         {
@@ -29,7 +30,32 @@ namespace RocketUtils
 
         protected abstract void OnAwake();
 
-        public static T Instance { get; private set; }
+        public static T Instance
+        {
+            get
+            {
+                if (!_instance)
+                {
+                    _instance = (T)FindObjectOfType(typeof(T));
+                    if (!_instance)
+                    {
+                        Debug.LogError("An instance of " + typeof(T) +
+                                       " is needed in the scene, but there is none.");
+                    }
+                    else
+                    {
+                        SingletonBehaviour<T> instance = _instance as SingletonBehaviour<T>;
+                        instance.OnAwake();
+                    }
+                }
+
+                return _instance;
+            }
+            set
+            {
+                _instance = value;
+            }
+        }
 
 #if ROC_DEBUG_MODE
         void OnGUI()
