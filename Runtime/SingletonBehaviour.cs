@@ -62,14 +62,14 @@ namespace RocketUtils
         {
             if (!DrawDebugLabel) return;
 
-            DrawOutline(new Rect(15, Screen.height - 25, 300, 80), "Rocket Debug", 1, new GUIStyle
+            DrawOutline(new Rect(35, Screen.height - 65, 300, 80), "Rocket Debug", 2, new GUIStyle
             {
-                fontSize = 12
+                fontSize = 24
             });
-            GUI.Label(new Rect(15, Screen.height - 25, 300, 80), "Rocket Debug", new GUIStyle
+            GUI.Label(new Rect(35, Screen.height - 65, 300, 80), "Rocket Debug", new GUIStyle
             {
                 normal = { textColor = Color.white },
-                fontSize = 12
+                fontSize = 24
             });
         }
 
