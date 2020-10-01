@@ -57,16 +57,22 @@ namespace RocketUtils
             }
         }
 
-#if ROC_DEBUG_MODE
+#if ROC_DEBUG_MODE || ROC_LOG_MODE
         void OnGUI()
         {
             if (!DrawDebugLabel) return;
 
-            DrawOutline(new Rect(35, Screen.height - 65, 300, 80), "Rocket Debug", 2, new GUIStyle
+            string labelString = "Rocket Log";
+
+#if ROC_DEBUG_MODE
+            labelString = "Rocket Debug";
+#endif
+
+            DrawOutline(new Rect(35, Screen.height - 130, 300, 80), labelString, 2, new GUIStyle
             {
                 fontSize = 24
             });
-            GUI.Label(new Rect(35, Screen.height - 65, 300, 80), "Rocket Debug", new GUIStyle
+            GUI.Label(new Rect(35, Screen.height - 130, 300, 80), labelString, new GUIStyle
             {
                 normal = { textColor = Color.white },
                 fontSize = 24
