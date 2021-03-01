@@ -26,7 +26,7 @@ extern "C"
 
     bool IsNeedToRequestIDFAInternal()
     {
-        if(@available(iOS 14, *))
+        if(@available(iOS 14.5, *))
         {
             return true;
         }
