@@ -1,6 +1,6 @@
 {
   "name": "com.rocket.rocketutils",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "displayName": "Rocket Utils",
   "description": "Utils for Rocket Games packages",
   "unity": "2018.3",
