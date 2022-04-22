@@ -5,6 +5,9 @@ namespace RocketUtils
     public abstract class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
         protected bool DrawDebugLabel;
+        public bool DrawTimeLabel;
+        public bool DrawFPSLabel;
+        
         private static T _instance;
 
         private void Awake()
@@ -58,6 +61,9 @@ namespace RocketUtils
         }
 
 #if ROC_DEBUG_MODE || ROC_LOG_MODE
+        private GUIStyle _timeGUIStyle;
+        private GUIStyle _fpsGUIStyle;
+        private float _deltaTime;
         void OnGUI()
         {
             if (!DrawDebugLabel) return;
@@ -77,6 +83,59 @@ namespace RocketUtils
                 normal = { textColor = Color.white },
                 fontSize = 24
             });
+
+            if (DrawTimeLabel)
+            {
+                if (_timeGUIStyle == null)
+                {
+                    _timeGUIStyle = new GUIStyle
+                    {
+                        fontSize = 28,
+                        active = { textColor = Color.white },
+                        normal = { textColor = Color.white },
+                        focused = { textColor = Color.white },
+                        hover = { textColor = Color.white },
+
+                    };
+                }
+        
+                GUI.contentColor = Color.white;
+        
+                GUILayout.Space(50);
+                GUILayout.BeginHorizontal("box");
+        
+                int seconds = (int)Time.time;
+                int minute = (seconds / 60);
+                int hour = (minute / 60);
+        
+                GUILayout.Label("Time : " + string.Format("{0:00}:{1:00}:{2:00}", hour, (minute) % 60, seconds % 60), _timeGUIStyle);
+        
+                GUILayout.EndHorizontal();
+            }
+            
+            if (DrawFPSLabel)
+            {
+                if (_fpsGUIStyle == null)
+                {
+                    _fpsGUIStyle = new GUIStyle
+                    {
+                        fontSize = 18,
+                        alignment = TextAnchor.UpperLeft,
+                        
+
+                    };
+                }
+                _deltaTime += (Time.unscaledDeltaTime - _deltaTime) * 0.1f;
+        
+                GUILayout.Space(0);
+                GUILayout.BeginHorizontal("box");
+
+                float fps = 1.0f / _deltaTime;
+                
+                GUILayout.Label(fps.ToString(), _timeGUIStyle);
+        
+                GUILayout.EndHorizontal();
+            }
         }
 
         void DrawOutline(Rect r, string t, int strength, GUIStyle style)
