@@ -84,6 +84,31 @@ namespace RocketUtils
                 fontSize = 24
             });
 
+            if (DrawFPSLabel)
+            {
+                if (_fpsGUIStyle == null)
+                {
+                    _fpsGUIStyle = new GUIStyle
+                    {
+                        fontSize = 20,
+                        active = { textColor = Color.white },
+                        normal = { textColor = Color.white },
+                        focused = { textColor = Color.white },
+                        hover = { textColor = Color.white },
+                    };
+                }
+                _deltaTime += (Time.unscaledDeltaTime - _deltaTime) * 0.1f;
+        
+                GUILayout.Space(50);
+                GUILayout.BeginHorizontal("box");
+
+                float fps = 1.0f / _deltaTime;
+                
+                GUILayout.Label($"{fps:00}" + " FPS", _fpsGUIStyle);
+        
+                GUILayout.EndHorizontal();
+            }
+            
             if (DrawTimeLabel)
             {
                 if (_timeGUIStyle == null)
@@ -101,39 +126,18 @@ namespace RocketUtils
         
                 GUI.contentColor = Color.white;
         
-                GUILayout.Space(50);
+                if (!DrawFPSLabel)
+                    GUILayout.Space(50);
+                if (DrawFPSLabel)
+                    GUILayout.Space(5);
                 GUILayout.BeginHorizontal("box");
         
                 int seconds = (int)Time.time;
                 int minute = (seconds / 60);
                 int hour = (minute / 60);
         
-                GUILayout.Label("Time : " + string.Format("{0:00}:{1:00}:{2:00}", hour, (minute) % 60, seconds % 60), _timeGUIStyle);
-        
-                GUILayout.EndHorizontal();
-            }
-            
-            if (DrawFPSLabel)
-            {
-                if (_fpsGUIStyle == null)
-                {
-                    _fpsGUIStyle = new GUIStyle
-                    {
-                        fontSize = 18,
-                        alignment = TextAnchor.UpperLeft,
-                        
+                GUILayout.Label($"Time : {hour:00}:{(minute) % 60:00}:{seconds % 60:00}", _timeGUIStyle);
 
-                    };
-                }
-                _deltaTime += (Time.unscaledDeltaTime - _deltaTime) * 0.1f;
-        
-                GUILayout.Space(0);
-                GUILayout.BeginHorizontal("box");
-
-                float fps = 1.0f / _deltaTime;
-                
-                GUILayout.Label(fps.ToString(), _timeGUIStyle);
-        
                 GUILayout.EndHorizontal();
             }
         }
