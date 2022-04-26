@@ -90,7 +90,7 @@ namespace RocketUtils
                 {
                     _fpsGUIStyle = new GUIStyle
                     {
-                        fontSize = 20,
+                        fontSize = 24,
                         active = { textColor = Color.white },
                         normal = { textColor = Color.white },
                         focused = { textColor = Color.white },
@@ -98,14 +98,18 @@ namespace RocketUtils
                     };
                 }
                 _deltaTime += (Time.unscaledDeltaTime - _deltaTime) * 0.1f;
+                
+                float fps = 1.0f / _deltaTime;
         
                 GUILayout.Space(50);
-                GUILayout.BeginHorizontal("box");
-
-                float fps = 1.0f / _deltaTime;
+                
+                GUILayout.BeginHorizontal();
+                GUILayout.Space(100);
+                GUILayout.BeginVertical("box");
                 
                 GUILayout.Label($"{fps:00}" + " FPS", _fpsGUIStyle);
-        
+                
+                GUILayout.EndVertical();
                 GUILayout.EndHorizontal();
             }
             
