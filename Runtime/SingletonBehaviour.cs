@@ -5,8 +5,8 @@ namespace RocketUtils
     public abstract class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
         protected bool DrawDebugLabel;
-        public bool DrawTimeLabel;
-        public bool DrawFPSLabel;
+        protected bool DrawTimeLabel;
+        protected bool DrawFPSLabel;
         
         private static T _instance;
 
