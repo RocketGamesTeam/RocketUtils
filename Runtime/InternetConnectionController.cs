@@ -147,7 +147,7 @@ namespace RocketUtils
 				if (ping.time < 0 && ping.time > PingTimeOutDuration)
 				{
 					// ----FAIL----
-					Log.Error("Rateus Timeout. ping.time:" + ping.time);
+					Log.Warning("Rateus Timeout. ping.time:" + ping.time);
 					callback.Invoke(false);
 
 					if (CoroutineController.IsCoroutineRunning("PingSkipTimer"))
@@ -164,13 +164,13 @@ namespace RocketUtils
 			else if (shouldSkip)
 			{
 				// ----FAIL----
-				Log.Error("Ping failed.");
+				Log.Warning("Ping failed.");
 				callback.Invoke(false);
 			}
 			else
 			{
 				// ----FAIL----
-				Log.Error("Unknown state.");
+				Log.Warning("Unknown state.");
 				callback.Invoke(false);
 			}
 
