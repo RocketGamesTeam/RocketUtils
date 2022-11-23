@@ -17,7 +17,7 @@ namespace RocketUtils
                 Instance = (T)FindObjectOfType(typeof(T));
                 if (Instance == null)
                 {
-                    Debug.LogError("An instance of " + typeof(T) +
+                    Debug.LogWarning("An instance of " + typeof(T) +
                                    " is needed in the scene, but there is none.");
                 }
                 else
