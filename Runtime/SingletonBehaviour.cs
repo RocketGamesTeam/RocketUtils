@@ -42,7 +42,7 @@ namespace RocketUtils
                     _instance = (T)FindObjectOfType(typeof(T));
                     if (!_instance)
                     {
-                        Debug.LogError("An instance of " + typeof(T) +
+                        Debug.LogWarning("An instance of " + typeof(T) +
                                        " is needed in the scene, but there is none.");
                     }
                     else
