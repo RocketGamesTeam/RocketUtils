@@ -29,12 +29,9 @@ namespace RocketUtils
             {
                 Destroy(gameObject); // On reload, singleton already set, so destroy duplicate.
             }
-        }
-
-        private void Start() => OnStart();
+        }        
 
         protected abstract void OnAwake();
-        protected abstract void OnStart();
 
         public static T Instance
         {
