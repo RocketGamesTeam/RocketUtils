@@ -144,7 +144,7 @@ namespace RocketUtils
 
 				// If pinging exceeds the default time (timeout), Unity returns -1 as ping.time
 				// This ping.time < 0 check is for that reason
-				if (ping.time < 0 && ping.time > PingTimeOutDuration)
+				if (ping.time < 0 || ping.time > PingTimeOutDuration)
 				{
 					// ----FAIL----
 					Log.Warning("Rateus Timeout. ping.time:" + ping.time);
