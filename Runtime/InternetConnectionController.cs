@@ -50,7 +50,7 @@ namespace RocketUtils
 
 	    private static bool _isInitialized;
 
-		private static readonly RocLog Log = new RocLog(typeof(InternetConnectionController).Name, DebugLevels.Info);
+		private static readonly RocLog Log = new RocLog(nameof(InternetConnectionController), DebugLevels.Info);
 
 
 		public static void Initialize()
