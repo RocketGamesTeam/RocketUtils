@@ -1,4 +1,5 @@
-﻿using RocketUtils.SerializableDictionary;
+﻿#if !ROC_SERIALIZED_DICT
+using RocketUtils.SerializableDictionary;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -609,3 +610,4 @@ namespace RocketUtils.Editor.SerializableDictionary
 		}
 	}
 }
+#endif

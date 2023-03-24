@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !ROC_SERIALIZED_DICT
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -320,3 +321,4 @@ namespace RocketUtils.SerializableDictionary
 		}
 	}
 }
+#endif
