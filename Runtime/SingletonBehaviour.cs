@@ -64,11 +64,18 @@ namespace RocketUtils
         private GUIStyle _timeGUIStyle;
         private GUIStyle _fpsGUIStyle;
         private float _deltaTime;
+        private string labelString = "Rocket Log";
+
+        public void ModifyDebugLabel(string textToAppend)
+        {
+#if ROC_DEBUG_MODE
+            labelString += textToAppend;
+#endif // ROC_DEBUG_MODE
+        }
+        
         void OnGUI()
         {
             if (!DrawDebugLabel) return;
-
-            string labelString = "Rocket Log";
 
 #if ROC_DEBUG_MODE
             labelString = "Rocket Debug";
