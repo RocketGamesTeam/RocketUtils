@@ -64,7 +64,10 @@ namespace RocketUtils
         private GUIStyle _timeGUIStyle;
         private GUIStyle _fpsGUIStyle;
         private float _deltaTime;
-        private string labelString = "Rocket Log";
+        
+#if ROC_DEBUG_MODE
+        private string labelString = "Rocket Debug";
+#endif
 
         public void ModifyDebugLabel(string textToAppend)
         {
@@ -77,9 +80,9 @@ namespace RocketUtils
         {
             if (!DrawDebugLabel) return;
 
-#if ROC_DEBUG_MODE
-            labelString = "Rocket Debug";
-#endif
+// #if ROC_DEBUG_MODE
+            // labelString = "Rocket Debug";
+// #endif
 
             DrawOutline(new Rect(35, Screen.height - 130, 300, 80), labelString, 2, new GUIStyle
             {
