@@ -1,4 +1,4 @@
-﻿#if !UNITY_EDITOR && UNITY_IOS
+﻿#if UNITY_IOS
 
 using System;
 using System.Runtime.InteropServices;
@@ -88,4 +88,4 @@ namespace RocketUtils.IDFAAuthorization
     }
 }
 
-#endif // !UNITY_EDITOR && UNITY_IOS
+#endif
