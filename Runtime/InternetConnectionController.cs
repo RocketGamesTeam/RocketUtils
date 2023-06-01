@@ -99,7 +99,8 @@ namespace RocketUtils
 		/// </summary>
 		/// <param name="url">Should be in IPv4 format</param>
 		/// <param name="callback">Returns boolean for success</param>
-		public static void PingUrl(string url, Action<bool> callback)
+		/// <param name="pingTimeOverride"></param>
+		public static void PingUrl(string url, Action<bool> callback, int pingTimeOverride = -1)
 		{
 			int count = url.Split('.').Length - 1;
 			if (count != 3)
@@ -108,21 +109,24 @@ namespace RocketUtils
 				Log.Warning("Are you sure you have given the url in IPv4 format?");
 			}
 
-			CoroutineController.StartCoroutine(PingRoutine(url, callback), "PingRoutine");
+			CoroutineController.StartCoroutine(PingRoutine(url, callback, pingTimeOverride), "PingRoutine");
 		}
 
 		/// <summary>
 		/// Pings 8.8.8.8 and returns a bool callback.
 		/// </summary>
 		/// <param name="callback"></param>
-		public static void PingGoogle(Action<bool> callback)
+		/// <param name="pingTimeOverride"></param>
+		public static void PingGoogle(Action<bool> callback, int pingTimeOverride = -1)
 		{
-			CoroutineController.StartCoroutine(PingRoutine("8.8.8.8", callback), "PingRoutine");
+			CoroutineController.StartCoroutine(PingRoutine("8.8.8.8", callback, pingTimeOverride), "PingRoutine");
 		}
 
 
-		private static IEnumerator PingRoutine(string url, Action<bool> callback)
+		private static IEnumerator PingRoutine(string url, Action<bool> callback, int pingTimeOverride = -1)
 		{
+			int pingTimeOut = pingTimeOverride == -1 ? PingTimeOutDuration : pingTimeOverride;
+
 			Stopwatch watch = new Stopwatch();
 			watch.Start();
 			Ping ping = new Ping(url);
@@ -130,7 +134,7 @@ namespace RocketUtils
 			Log.Debug("Ping started");
 
 			bool shouldSkip = false;
-			CoroutineController.DoAfterGivenTime(PingTimeOutDuration/1000f, () => shouldSkip = true, "PingSkipTimer");
+			CoroutineController.DoAfterGivenTime(pingTimeOut/1000f, () => shouldSkip = true, "PingSkipTimer");
 
 			yield return new WaitUntil(() => ping.isDone || shouldSkip);
 
@@ -144,7 +148,7 @@ namespace RocketUtils
 
 				// If pinging exceeds the default time (timeout), Unity returns -1 as ping.time
 				// This ping.time < 0 check is for that reason
-				if (ping.time < 0 || ping.time > PingTimeOutDuration)
+				if (ping.time < 0 || ping.time > pingTimeOut)
 				{
 					// ----FAIL----
 					Log.Warning("Rateus Timeout. ping.time:" + ping.time);
