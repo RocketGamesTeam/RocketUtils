@@ -33,6 +33,18 @@ namespace RocketUtils
 			return deviceModel;
 		}
 
+		public static string DeviceUniqueId
+		{
+			get
+			{
+				string savedDeviceId = PlayerPrefs.GetString("gmDeviceId");
+				if (string.IsNullOrEmpty(savedDeviceId))
+					savedDeviceId = GetDeviceUniqueId();
+
+				return savedDeviceId;
+			}
+		}
+
 		public static string GetDeviceUniqueId()
 		{
 #if UNITY_ANDROID && !UNITY_EDITOR
